@@ -10,7 +10,7 @@ export function PaginaPrincipal() {
 
       <main className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-10 place-items-center">
         {itens.map((item) => (
-          <a key={item.id} href={item.href} className="w-64 p-4">
+          <a key={item.id} href={item.href} className="w-64">
             <div className="flex flex-col items-center gap-3">
               {/* Área fixa da imagem (garante alinhamento do texto) */}
               <div className="h-42 w-56 flex items-center justify-center">
