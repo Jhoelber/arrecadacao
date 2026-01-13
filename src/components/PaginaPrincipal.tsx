@@ -13,13 +13,13 @@ export function PaginaPrincipal() {
           <a key={item.id} href={item.href} className="w-64 p-4">
             <div className="flex flex-col items-center gap-3">
               {/* Área fixa da imagem (garante alinhamento do texto) */}
-              <div className="h-32 w-32 flex items-center justify-center">
+              <div className="h-42 w-56 flex items-center justify-center">
                 <img
                   src={item.imgUrl}
                   alt={item.titulo}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-full max-w-full object-contain"
+                  className="max-h-full max-w-full object-contain "
                 />
               </div>
 
