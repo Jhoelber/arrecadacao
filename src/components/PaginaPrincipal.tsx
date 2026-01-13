@@ -24,7 +24,7 @@ export function PaginaPrincipal() {
               </div>
 
               {/* Área do título com altura reservada */}
-              <div className="text-center min-h-[2.75rem] flex items-center">
+              <div className="text-center min-h-11 flex items-center">
                 <div className="text-sm font-medium line-clamp-2">
                   {item.titulo}
                 </div>
