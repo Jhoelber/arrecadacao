@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MENU_FALLBACK, type MenuItem } from "../menuFallback";
 
 type MenuConfig = { versao: number; itens: MenuItem[] };
@@ -25,10 +25,12 @@ export function useMenu(pollMs = 120_000) {
   const cached = useMemo(() => readCache(), []);
   const [cfg, setCfg] = useState<MenuConfig>(cached ?? MENU_FALLBACK);
 
-  async function load() {
-    if (!MENU_URL) return;
+  const inFlight = useRef(false);
 
-    // “cache buster” leve pra reduzir chance de cache do raw
+  async function load() {
+    if (!MENU_URL || inFlight.current) return;
+    inFlight.current = true;
+
     const url = `${MENU_URL}?t=${Math.floor(Date.now() / pollMs)}`;
 
     try {
@@ -39,16 +41,27 @@ export function useMenu(pollMs = 120_000) {
       if (!remote?.itens?.length) return;
 
       const current = readCache() ?? cfg;
-      if ((remote.versao ?? 0) >= (current.versao ?? 0)) {
+      const remoteV = Number(remote.versao ?? 0);
+      const currentV = Number(current.versao ?? 0);
+
+      // atualiza só se mudou de verdade
+      if (remoteV > currentV) {
         writeCache(remote);
         setCfg(remote);
       }
-    } catch {}
+    } catch {
+      // silencioso, mantém cache atual
+    } finally {
+      inFlight.current = false;
+    }
   }
 
   useEffect(() => {
     load();
-    const id = setInterval(load, pollMs);
+
+    const jitter = Math.floor(Math.random() * 10_000); // 0–10s
+    const id = setInterval(load, pollMs + jitter);
+
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pollMs]);
