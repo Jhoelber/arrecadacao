@@ -20,7 +20,7 @@ export const MENU_FALLBACK: MenuConfig = {
       id: 1,
       ordem: 1,
       titulo: "Exemplo (fallback)",
-      descricao: "Se aparecer isso, o JSON remoto não carregou.",
+      descricao: "Problema ao carregar.",
       imgUrl: "https://res.cloudinary.com/ddzqr6r2m/image/upload/v1739365393/images/Estadual.png",
       href: "https://google.com",
       target: "_self",
