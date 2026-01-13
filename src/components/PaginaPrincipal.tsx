@@ -17,7 +17,7 @@ export function PaginaPrincipal() {
                                 alt={item.titulo}
                                 loading="lazy"
                                 decoding="async"
-                                className="h-auto w-48 object-contain"
+                                className="h-auto w-32 object-contain"
                             />
                             <div className="text-center">
                                 <div className="text-sm font-medium">{item.titulo}
