@@ -1,13 +1,14 @@
-import './App.css'
-import { PaginaPrincipal } from './components/PaginaPrincipal'
+import "./App.css";
+import { PaginaPrincipal } from "./components/PaginaPrincipal";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
-
   return (
     <>
-      <PaginaPrincipal/>
+      <PaginaPrincipal />
+      <Analytics />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
