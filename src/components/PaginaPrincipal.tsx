@@ -5,7 +5,7 @@ export function PaginaPrincipal() {
   const { itens } = useMenu(120_000);
 
   const total = itens.length;
-  const restoLg = total % 3; // porque no lg você tem 3 colunas
+  const restoLg = total % 3; // porque no lg tem 3 colunas
 
   return (
     <div>

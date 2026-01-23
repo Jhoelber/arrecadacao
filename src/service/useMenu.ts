@@ -44,13 +44,13 @@ export function useMenu(pollMs = 120_000) {
       const remoteV = Number(remote.versao ?? 0);
       const currentV = Number(current.versao ?? 0);
 
-      // atualiza só se mudou de verdade
+      
       if (remoteV > currentV) {
         writeCache(remote);
         setCfg(remote);
       }
     } catch {
-      // silencioso, mantém cache atual
+      
     } finally {
       inFlight.current = false;
     }
@@ -59,11 +59,11 @@ export function useMenu(pollMs = 120_000) {
   useEffect(() => {
     load();
 
-    const jitter = Math.floor(Math.random() * 10_000); // 0–10s
+    const jitter = Math.floor(Math.random() * 10_000); 
     const id = setInterval(load, pollMs + jitter);
 
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, [pollMs]);
 
   const itens = useMemo(

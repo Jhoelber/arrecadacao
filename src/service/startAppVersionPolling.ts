@@ -8,7 +8,7 @@ export function startAppVersionPolling(baseMs = 120_000) {
   let backoffMs = 0;
 
   const scheduleNext = () => {
-    const jitter = Math.floor(Math.random() * 15_000); // 0–15s
+    const jitter = Math.floor(Math.random() * 15_000); 
     const wait = Math.max(baseMs + jitter, backoffMs);
     setTimeout(tick, wait);
   };
@@ -29,10 +29,10 @@ export function startAppVersionPolling(baseMs = 120_000) {
       if (remote > current) {
         localStorage.setItem(KEY, String(remote));
         window.location.reload();
-        return; // não precisa agendar, vai recarregar
+        return; 
       }
 
-      backoffMs = 0; // sucesso, zera backoff
+      backoffMs = 0; 
     } catch {
       // backoff exponencial: 5s -> 10s -> 20s -> ... até 5 min
       backoffMs = backoffMs ? Math.min(backoffMs * 2, 300_000) : 5_000;
@@ -42,5 +42,5 @@ export function startAppVersionPolling(baseMs = 120_000) {
     }
   };
 
-  tick(); // start
+  tick(); 
 }
