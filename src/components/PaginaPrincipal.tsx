@@ -1,23 +1,22 @@
 import { useMenu } from "../service/useMenu";
 import { Topo } from "./Topo";
+import { Footer } from "./types/Footer";
 
 export function PaginaPrincipal() {
   const { itens } = useMenu(120_000);
 
   const total = itens.length;
-  const restoLg = total % 3; // porque no lg tem 3 colunas
+  const restoLg = total % 3;
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Topo />
 
-      <main className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-10 place-items-center">
+      <main className="flex-1 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-10 place-items-center">
         {itens.map((item, index) => {
-        
           const empurrarProMeio =
             restoLg === 1 && index === total - 1 ? "lg:col-start-2" : "";
 
-         
           const empurrarParProMeio =
             restoLg === 2 && index === total - 2 ? "lg:col-start-2" : "";
 
@@ -46,6 +45,8 @@ export function PaginaPrincipal() {
           );
         })}
       </main>
+
+      <Footer />
     </div>
   );
 }
