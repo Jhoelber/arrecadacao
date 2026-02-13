@@ -1,6 +1,7 @@
 import { useMenu } from "../service/useMenu";
 import { Topo } from "./Topo";
 import { Footer } from "./types/Footer";
+import { trackMenuClick } from "../lib/analytics"; // <-- add
 
 export function PaginaPrincipal() {
   const { itens } = useMenu(120_000);
@@ -24,6 +25,9 @@ export function PaginaPrincipal() {
             <a
               key={item.id}
               href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackMenuClick(item.id, item.titulo, item.href)}
               className={`w-64 ${empurrarProMeio} ${empurrarParProMeio}`}
             >
               <div className="flex flex-col items-center gap-3">
